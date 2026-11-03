@@ -1,0 +1,20 @@
+[general]
+name=MapBundle
+qgisMinimumVersion=3.44
+qgisMaximumVersion=4.99
+supportsQt6=True
+description=Allows for easy export and import of bundles of QGIS layers, including styles (SVG icons and rasters included), draw order, and fonts.
+about=Exports the current project as a MapBundle: a single GeoPackage containing every vector and raster layer (tables numbered in drawing order), each layer's style (also saved as the layer's default style), all SVG and image symbols embedded, the font files used, and the project itself.
+    Recipients use Plugins > MapBundle > Add MapBundle to Project, which installs the bundled fonts for QGIS (no admin rights) and adds the layers to the open project as a group, keeping styles and order. The full project (with layouts) can also be opened. The geopackage can also be dropped in manually.
+    Fonts are only bundled when their licence clearly allows sharing (e.g. SIL Open Font License), unless you choose otherwise. Optionally, copies of the SVGs, images and rasters used can be saved as a separate zip.
+version=0.2.0
+author=Liam Downs-Tepper
+email=liam.downs-tepper@univie.ac.at
+homepage=https://github.com/iamliamdt/MapBundler
+repository=https://github.com/iamliamdt/MapBundler
+tracker=https://github.com/iamliamdt/MapBundler/issues
+tags=portable,package,styles,import,export
+category=Plugins
+icon=icon.png
+experimental=True
+deprecated=False
