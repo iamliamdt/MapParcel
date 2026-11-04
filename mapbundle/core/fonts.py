@@ -192,7 +192,7 @@ class FontIndex:
         for font in self._index.get(family.lower(), []):
             try:
                 with open(font.path, "rb") as fh:
-                    digest = hashlib.sha1(fh.read()).hexdigest()
+                    digest = hashlib.sha256(fh.read()).hexdigest()
             except OSError:
                 continue
             if digest not in hashes:
