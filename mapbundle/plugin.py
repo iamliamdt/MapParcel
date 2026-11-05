@@ -6,7 +6,7 @@ import os
 import re
 
 from qgis.core import Qgis, QgsFeedback, QgsProject
-from qgis.PyQt.QtCore import Qt, QTimer
+from qgis.PyQt.QtCore import QSize, Qt, QTimer
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import (
     QApplication,
@@ -32,6 +32,15 @@ CONTEXT_LAYER_TYPES = [t for t in (getattr(Qgis.LayerType, n, None) for n in
 TITLE = "MapBundle"
 
 
+def _icon(kind: str) -> QIcon:
+    """Toolbar icon: the box with a blue up arrow (export) or a green plus (add)."""
+    folder = os.path.join(os.path.dirname(__file__), "icons")
+    icon = QIcon()
+    for size in (16, 24, 32, 48, 64, 128):
+        icon.addFile(os.path.join(folder, f"{kind}_{size}.png"), QSize(size, size))
+    return icon
+
+
 class MapBundlePlugin:
     def __init__(self, iface):
         self.iface = iface
@@ -42,12 +51,12 @@ class MapBundlePlugin:
     # ----------------------------------------------------------------- setup
 
     def initGui(self):
-        icon = QIcon(os.path.join(os.path.dirname(__file__), "icon.png"))
+        export_icon, add_icon = _icon("export"), _icon("add")
         win = self.iface.mainWindow()
-        export_action = QAction(icon, "Export MapBundle…", win)
+        export_action = QAction(export_icon, "Export MapBundle…", win)
         export_action.setToolTip("Package this project's layers, styles, symbols and fonts into one GeoPackage")
         export_action.triggered.connect(lambda: self.export_bundle())
-        add_action = QAction(icon, "Add MapBundle to Project…", win)
+        add_action = QAction(add_icon, "Add MapBundle to Project…", win)
         add_action.setToolTip("Add a MapBundle's layers to the current project as a group")
         add_action.triggered.connect(self.add_bundle)
         open_action = QAction("Open MapBundle as Project…", win)
@@ -60,7 +69,7 @@ class MapBundlePlugin:
         self.iface.addToolBarIcon(add_action)
 
         # Right-click on layers in the Layers panel
-        self.context_action = QAction(icon, "Export Selected Layers as MapBundle…", win)
+        self.context_action = QAction(export_icon, "Export Selected Layers as MapBundle…", win)
         self.context_action.triggered.connect(lambda: self.export_bundle(from_selection=True))
         for layer_type in CONTEXT_LAYER_TYPES:
             self.iface.addCustomActionForLayerType(self.context_action, "", layer_type, True)
