@@ -70,46 +70,8 @@ The project you have open is never modified: the export works on a private copy.
 - **Subset exports:** print layouts are kept but may refer to layers that weren't included.
 - **Add to Project:** brings layers only. Layouts and map themes need *Open MapParcel as Project…*.
 
-## Publishing on plugins.qgis.org
-
-1. Replace the placeholders in `map_parcel/metadata.txt`: `author`, `email`, `homepage`, `repository`, `tracker`.
-2. Push this repository to a public GitHub repo.
-3. Run `python make_zip.py`. This creates `dist/map_parcel-<version>.zip`.
-4. Sign in at <https://plugins.qgis.org> with an OSGeo ID and upload the zip.
-5. For later releases, bump `version` and `changelog` in `metadata.txt` and upload a new zip.
-
-Until the plugin is approved, share the zip directly: *Plugins → Manage and Install Plugins → Install from ZIP*.
-
-## Development
-
-The code is split into a GUI layer and a core that doesn't need the GUI:
-
-- `map_parcel/plugin.py` and `dialogs.py`: QGIS GUI.
-- `map_parcel/core/`: the logic, which also runs without the GUI.
-  - `packager.py`: the export pipeline.
-  - `xmlscan.py`: embeds images and finds fonts in the project XML.
-  - `fonts.py`: reads font names and licences, stores and installs fonts.
-  - `parcel.py`: the file format (project URIs, attachments).
-  - `pathfix.py`: redirects renamed GeoPackages.
-  - `importer.py`: font install, and adding a parcel to a project as a group.
-- `tools/make_icon2.py`: draws the plugin icon (option F). `tools/make_icon.py` holds earlier icon drafts.
-- `tools/make_toolbar_icons.py`: draws the toolbar icons (Export: blue arrow badge; Add: green plus) into `map_parcel/icons/`.
-
-### Tests
-
-The tests are end to end. They build a styled project with:
-- custom SVG/PNG symbols
-- a font marker
-- a label with an SVG background
-- a font the recipient doesn't have
-- a scratch layer
-- byte and float rasters
-
-Then they export it, rename the file, delete the sources, open it in a fresh profile and compare renders pixel by pixel.
-
-```bash
-QGIS_PYTHON=/path/to/qgis/python tests/run_tests.sh
-```
+## Disclaimer
+AI was used in the creation of this plugin.
 
 ## Licence
 
