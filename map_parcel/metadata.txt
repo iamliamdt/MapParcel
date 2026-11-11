@@ -1,0 +1,22 @@
+[general]
+name=MapParcel
+qgisMinimumVersion=3.44
+qgisMaximumVersion=4.99
+supportsQt6=True
+description=Share a whole project or selected layers as one GeoPackage that keeps its styles, SVG symbols, fonts and drawing order.
+about=Exports the current project as a MapParcel: a single GeoPackage containing every vector and raster layer (tables numbered in drawing order), each layer's style (also saved as the layer's default style), all SVG and image symbols embedded, the font files used, and the project itself. No server is needed: send the file by email, LMS or USB.
+    Recipients use Plugins > MapParcel > Add MapParcel to Project, which installs the bundled fonts for QGIS (no admin rights) and adds the layers to the open project as a group, keeping styles and order. The full project (with layouts) can also be opened. Without the plugin the file still opens via Project > Open From > GeoPackage, but fonts that are not installed are substituted.
+    Fonts are only bundled when their licence clearly allows sharing (e.g. SIL Open Font License), unless you choose otherwise. Optionally, copies of the SVGs, images and rasters used can be saved as a separate zip.
+version=0.4.0
+author=Liam Downs-Tepper
+email=liam.downs-tepper@univie.ac.at
+homepage=https://github.com/iamliamdt/map_parcel
+repository=https://github.com/iamliamdt/map_parcel
+tracker=https://github.com/iamliamdt/map_parcel/issues
+tags=geopackage,style,symbology,fonts,svg,export,package,share,basemap,education,teaching
+category=Plugins
+icon=icon.png
+experimental=True
+deprecated=False
+changelog=
+    0.4.0 First release as MapParcel.
